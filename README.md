@@ -83,24 +83,13 @@ The following are the available command-line flags(excluding above wallet flags)
 |-------------------|--------------------------------------------------|---------------|
 | -httpport         | Listener port to serve HTTP connection           | 8080          |
 | -proxycount       | Count of reverse proxies in front of the server  | 0             |
-| -faucet.amount    | Number of Ethers to transfer per user request    | 1             |
+| -faucet.amountString    | Number of Ethers to transfer per user request    | 0.01             |
 | -faucet.minutes   | Number of minutes to wait between funding rounds | 1440          |
 | -faucet.name      | Network name to display on the frontend          | testnet       |
 | -faucet.symbol    | Token symbol to display on the frontend          | ETH           |
 | -hcaptcha.sitekey | hCaptcha sitekey                                 |               |
 | -hcaptcha.secret  | hCaptcha secret                                  |               |
 
-### Docker deployment
-
-```bash
-docker run -d -p 8080:8080 -e WEB3_PROVIDER=rpc endpoint -e PRIVATE_KEY=hex private key chainflag/eth-faucet:1.1.0
-```
-
-or
-
-```bash
-docker run -d -p 8080:8080 -e WEB3_PROVIDER=rpc endpoint -e KEYSTORE=keystore path -v `pwd`/keystore:/app/keystore -v `pwd`/password.txt:/app/password.txt chainflag/eth-faucet:1.1.0
-```
 
 ## License
 
