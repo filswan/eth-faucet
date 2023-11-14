@@ -55,7 +55,7 @@ func (s *Server) handleClaim() http.HandlerFunc {
 		address, _ := readAddress(r)
 		ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
 		defer cancel()
-		txHash, err := s.Transfer(ctx, address, chain.EtherToWei(int64(s.cfg.payout)))
+		txHash, err := s.Transfer(ctx, address, chain.StringEthToWei(s.cfg.payoutString))
 		if err != nil {
 			log.WithError(err).Error("Failed to send transaction")
 			renderJSON(w, claimResponse{Message: err.Error()}, http.StatusInternalServerError)
