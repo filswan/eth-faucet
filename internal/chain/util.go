@@ -21,3 +21,17 @@ func IsValidAddress(address string, checksummed bool) bool {
 	}
 	return !checksummed || common.HexToAddress(address).Hex() == address
 }
+
+// StringEthToWei converts a string representation of Ether to a *big.Int representation of Wei.
+func StringEthToWei(amount string) *big.Int {
+	ether, _, err := big.ParseFloat(amount, 10, 0, big.ToNearestEven)
+	if err != nil {
+		// Handle the error according to your needs.
+		return nil
+	}
+
+	wei := new(big.Float).Mul(ether, big.NewFloat(1e18))
+	result := new(big.Int)
+	wei.Int(result) // Convert big.Float to big.Int
+	return result
+}

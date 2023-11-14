@@ -48,3 +48,37 @@ func TestEtherToWei(t *testing.T) {
 		})
 	}
 }
+
+func TestStringEthToWei(t *testing.T) {
+	type args struct {
+		amount string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *big.Int
+	}{
+		{
+			name: "Test 0.01 Ether",
+			args: args{amount: "0.01"},
+			want: big.NewInt(10000000000000000), // 0.01 ether in wei
+		},
+		{
+			name: "Test 1 Ether",
+			args: args{amount: "1"},
+			want: big.NewInt(1000000000000000000), // 1 ether in wei
+		},
+		{
+			name: "Test 1.5 Ether",
+			args: args{amount: "1.5"},
+			want: big.NewInt(1500000000000000000), // 1.5 ether in wei
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := StringEthToWei(tt.args.amount); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("StringEthToWei() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

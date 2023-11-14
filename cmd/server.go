@@ -18,13 +18,14 @@ import (
 
 var (
 	appVersion = "v1.1.0"
-	chainIDMap = map[string]int{"goerli": 5, "sepolia": 11155111}
+	chainIDMap = map[string]int{"swantest": 8598668088}
 
 	httpPortFlag = flag.Int("httpport", 8080, "Listener port to serve HTTP connection")
 	proxyCntFlag = flag.Int("proxycount", 0, "Count of reverse proxies in front of the server")
 	versionFlag  = flag.Bool("version", false, "Print version number")
 
-	payoutFlag   = flag.Int("faucet.amount", 1, "Number of Ethers to transfer per user request")
+	payoutFlag   = flag.Int("faucet.amount", 1, "(Abandoned)Number of Ethers to transfer per user request")
+	payoutString = flag.String("faucet.amountString", "0.01", "String Number of Ethers to transfer per user request")
 	intervalFlag = flag.Int("faucet.minutes", 1440, "Number of minutes to wait between funding rounds")
 	netnameFlag  = flag.String("faucet.name", "testnet", "Network name to display on the frontend")
 	symbolFlag   = flag.String("faucet.symbol", "ETH", "Token symbol to display on the frontend")
@@ -60,7 +61,7 @@ func Execute() {
 	if err != nil {
 		panic(fmt.Errorf("cannot connect to web3 provider: %w", err))
 	}
-	config := server.NewConfig(*netnameFlag, *symbolFlag, *httpPortFlag, *intervalFlag, *payoutFlag, *proxyCntFlag, *hcaptchaSiteKeyFlag, *hcaptchaSecretFlag)
+	config := server.NewConfig(*netnameFlag, *symbolFlag, *payoutString, *httpPortFlag, *intervalFlag, *payoutFlag, *proxyCntFlag, *hcaptchaSiteKeyFlag, *hcaptchaSecretFlag)
 	go server.NewServer(txBuilder, config).Run()
 
 	c := make(chan os.Signal, 1)
