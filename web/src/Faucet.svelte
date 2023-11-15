@@ -135,7 +135,7 @@
               <span class="navbar-item">
                 <a
                   class="button is-white is-outlined"
-                  href="https://github.com/chainflag/eth-faucet"
+                  href="https://github.com/filswan/eth-faucet"
                 >
                   <span class="icon">
                     <i class="fa fa-github" />
@@ -156,9 +156,6 @@
             Receive {faucetInfo.payout}
             {faucetInfo.symbol} per request
           </h1>
-          <h2 class="subtitle">
-            Serving from {faucetInfo.account}
-          </h2>
           <div id="hcaptcha" data-size="invisible"></div>
           <div class="box">
             <div class="field is-grouped">
